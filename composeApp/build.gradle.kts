@@ -119,3 +119,53 @@ compose.desktop {
         }
     }
 }
+
+val javafx_base_openapis = listOf(
+    "com.sun.javafx.logging"
+)
+
+val javafx_graphics_openapis = listOf(
+    "com.sun.javafx.application",
+    "com.sun.javafx.embed",
+    "com.sun.javafx.sg.prism",
+    "com.sun.javafx.scene",
+    "com.sun.javafx.util",
+    "com.sun.prism",
+    "com.sun.glass.ui",
+    "com.sun.javafx.geom.transform",
+    "com.sun.javafx.tk",
+    "com.sun.glass.utils",
+    "com.sun.javafx.font",
+    "com.sun.javafx.scene.input",
+    "com.sun.javafx.stage",
+    "com.sun.javafx.geom",
+    "com.sun.javafx.cursor",
+    "com.sun.prism.paint",
+    "com.sun.scenario.effect",
+    "com.sun.javafx.text",
+    "com.sun.javafx.scene.text",
+    "com.sun.javafx.iio",
+    "com.sun.scenario.effect.impl.prism"
+)
+
+val javafx_controls_openapis = listOf(
+    "com.sun.javafx.scene.control"
+)
+
+val customJvmArgs = listOf(
+    "--module-path",
+    "F:\\KyleWong\\javafx-sdk-17.0.13\\lib",
+    "--add-modules",
+    "javafx.controls,javafx.fxml"
+) +
+    (
+        javafx_base_openapis.map { "javafx.base/" + it }
+            + javafx_graphics_openapis.map { "javafx.graphics/" + it }
+            + javafx_controls_openapis.map { "javafx.controls/" + it }
+        ).map { it + "=ALL-UNNAMED" }.map { listOf("--add-opens", it) }.flatten()
+
+//tasks.withType<JavaExec> {
+//    jvmArgs(
+//        customJvmArgs
+//    )
+//}
