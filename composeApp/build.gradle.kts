@@ -154,7 +154,7 @@ val javafx_controls_openapis = listOf(
 
 val customJvmArgs = listOf(
     "--module-path",
-    "F:\\KyleWong\\javafx-sdk-17.0.13\\lib",
+    "/home/kylewong/Softwares/javafx-sdk-21.0.5/lib",
     "--add-modules",
     "javafx.controls,javafx.fxml"
 ) +
@@ -164,8 +164,8 @@ val customJvmArgs = listOf(
             + javafx_controls_openapis.map { "javafx.controls/" + it }
         ).map { it + "=ALL-UNNAMED" }.map { listOf("--add-opens", it) }.flatten()
 
-//tasks.withType<JavaExec> {
-//    jvmArgs(
-//        customJvmArgs
-//    )
-//}
+tasks.withType<JavaExec> {
+    jvmArgs(
+        customJvmArgs
+    )
+}
